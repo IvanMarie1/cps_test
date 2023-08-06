@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html data-theme="light">
+	<head>
+		<title>Test CPS</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+	</head>
+	<body>
+		<h1 id="title">Test de vitesse de clic</h1>
+		<h4>Cliquez aussi vite que vous pouvez !</h4>
+		<div class="settings">
+			<button 
+					class="switch"
+					data-theme-toggle
+					aria-label="Change to dark theme"
+				>
+				<div class="slider">
+					<img src="img/icon_sun.png">
+				</div>
+			</button>
+			<div class="gear">
+				<img src="img/icon_gear.png">
+				<p class="text">Thèmes de couleur</p>
+				<div class="color-themes">
+					<div class="red">
+						<div class="color1"></div>
+						<div class="color2"></div>
+						<div class="white-strip"><p>red</p></div>
+					</div>
+					<div class="orange">
+						<div class="color1"></div>
+						<div class="color2"></div>
+						<div class="white-strip"><p>orange</p></div>
+					</div>
+					<div class="yellow">
+						<div class="color1"></div>
+						<div class="color2"></div>
+						<div class="white-strip"><p>Yellow</p></div>
+					</div>
+					<div class="blue">
+						<div class="color1"></div>
+						<div class="color2"></div>
+						<div class="white-strip"><p>blue</p></div>
+					</div>
+					<div class="cyan">
+						<div class="color1"></div>
+						<div class="color2"></div>
+						<div class="white-strip"><p>cyan</p></div>
+					</div>
+					<div class="pink">
+						<div class="color1"></div>
+						<div class="color2"></div>
+						<div class="white-strip"><p>pink</p></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+
+		<ul class="time_bar">
+			<li class="time one" onclick="change_time(1, 'one')">1
+				<div class="highlight"></div>
+			</li>
+			<li class="time five active" onclick="change_time(5, 'five')">5
+				<div class="highlight"></div>
+			</li>
+			<li class="time ten" onclick="change_time(10, 'ten')">10
+				<div class="highlight"></div>
+			</li>
+			<li class="time thirty" onclick="change_time(30, 'thirty')">30
+				<div class="highlight"></div>
+			</li>
+		</ul>
+
+		<div id="game_box">
+			<p id="game_text">Clique ici pour commencer</p>
+		</div>
+		<div class="info">
+			<p id="timer">0.00s</p>
+			<p id="score">0.00 CPS</p>
+		</div>
+
+		<div id="darkscreen"></div>
+		<div id="resultat">
+			<div id="cross">
+				<div class="barre gauche"></div>
+				<div class="barre droite"></div>
+			</div>
+			<p id="resultat_txt"></p>
+			<p id="record"></p>
+		</div>
+
+		<footer>
+			<a></a>
+			<p>Ivan &copy; 2023</p>
+		</footer>
+
+		<script src="script.js"></script>
+	</body>
+</html>
