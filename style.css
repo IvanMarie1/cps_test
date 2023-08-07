@@ -56,18 +56,16 @@ h4 {
 	height: 50px;
 	background-color: var(--color-bg);
 	border-radius: 25px;
-	border: 0;
-	outline: solid 4px var(--color2);
+	border: solid 4px var(--color2);
 	transition: all 0.1s;
 }
 
 .slider {
 	position: absolute;
 	content: "";
-	height: 42px;
-	width: 42px;
-	left: 4px;
-	bottom: 4px;
+	top: 8px;
+	height: 34px;
+	width: 34px;
 	border-radius: 50%;
 	background-color: var(--color2);
 	transition: transform ease-out 0.15s;
@@ -78,13 +76,13 @@ h4 {
 }
 
 .slider img {
-	width: 22px;
+	width: 20px;
 	margin: 0;
-	margin-top: 10px;
+	margin-top: 7px;
 }
 
 .switch:hover {
-	outline: solid 4px var(--color1);
+	border : solid 4px var(--color1);
 }
 .switch:hover .slider {
 	background-color:var(--color1);
@@ -107,42 +105,42 @@ h4 {
 	position: absolute;
 	top: 0;
 	right: 0;
-	height: 30px;
-	padding: 10px;
+	height: 26px;
+	padding: 12px;
 	border-radius: 25px;
 	cursor: pointer;
-	transition: transform ease-out .5s;
+	transition: transform ease-out .3s;
 }
 
 .gear.open, .gear:hover {
 	background-color: var(--color1);
 }
 .gear img.open {
-	transform: rotate(120deg);
+	transform: rotate(-120deg);
 }
 .gear.open {
 	width: 350px;
-	height: 460px;
+	height: 430px;
 }
 .gear:not(.open) .color-themes, .gear:not(.open) .text {
 	display: none;
 }
 
-.gear .text {
-	position: absolute;
-	display: block;
-	font-size: 16pt;
-	margin-left: 60px;
-	color: #121212;
-	font-weight: bold;
-}
 
 .gear.open .color-themes {
 	display: flex;
+	justify-content: center;
 	flex-wrap: wrap;
 	width: 250px;
 	margin: auto;
-	margin-top: 50px;
+	margin-top: 25px;
+}
+
+.color-themes .title {
+	margin: 0;
+	font-size: 16pt;
+	color: #121212;
+	font-weight: bold;
 }
 
 .color-themes > div {
@@ -417,7 +415,7 @@ footer {
 
 
 .footer-icons {
-	margin: 25px 0;
+	margin: 25px 0 15px 0;
 }
 
 .footer-icons .icon {
