@@ -143,32 +143,22 @@ gear_icon.addEventListener("click", () => {
 	}
 });
 
-document.querySelector(".color-themes .blue").addEventListener("click", () => {
-	document.documentElement.style.setProperty("--color1", "#556ee6")
-	document.documentElement.style.setProperty("--color2", "#778beb")
-});
 
-document.querySelector(".color-themes .yellow").addEventListener("click", () => {
-	document.documentElement.style.setProperty("--color1", "#f5cd7a")
-	document.documentElement.style.setProperty("--color2", "#f7d794")
-});
+const color_themes = {
+	"red": 		["#e66868", "#eb8686"],
+	"orange": 	["#e26042", "#e77f67"],
+	"yellow": 	["#f5cd7a", "#f7d794"],
+	"pink": 	["#f78fb3", "#f8a5c2"],
+	"cyan": 	["#3ec1d3", "#64cddb"],
+	"blue": 	["#556ee6", "#778beb"]
+};
+const color_boxes = document.querySelectorAll(".color-themes > div");
 
-document.querySelector(".color-themes .red").addEventListener("click", () => {
-document.documentElement.style.setProperty("--color1", "#e66868")
-document.documentElement.style.setProperty("--color2", "#eb8686")
-});
-
-document.querySelector(".color-themes .orange").addEventListener("click", () => {
-document.documentElement.style.setProperty("--color1", "#e26042")
-document.documentElement.style.setProperty("--color2", "#e77f67")
-});
-
-document.querySelector(".color-themes .pink").addEventListener("click", () => {
-document.documentElement.style.setProperty("--color1", "#f78fb3")
-document.documentElement.style.setProperty("--color2", "#f8a5c2")
-});
-
-document.querySelector(".color-themes .cyan").addEventListener("click", () => {
-document.documentElement.style.setProperty("--color1", "#3ec1d3")
-document.documentElement.style.setProperty("--color2", "#64cddb")
-});
+for (let i = 0; i < color_boxes.length; i++) {
+	let color_box = color_boxes[i];
+	color_box.addEventListener("click", () => {
+		let color = color_box.classList[0];
+		document.documentElement.style.setProperty("--color1", color_themes[color][0]);
+		document.documentElement.style.setProperty("--color2", color_themes[color][1]);
+	});
+}
