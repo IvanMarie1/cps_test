@@ -1,13 +1,19 @@
-let box = document.getElementById("game_box");
-let text = document.getElementById("game_text");
-let timer = document.getElementById("timer");
-let score = document.getElementById("score");
-let fond_noir = document.getElementById("darkscreen");
-let resultat = document.getElementById("resultat");
-let resultat_txt = document.getElementById("resultat_txt");
-let record_txt = document.getElementById("record");
+let box = document.querySelector("#game_box");
+let text = document.querySelector("#game_text");
+let timer = document.querySelector("#timer");
+let score = document.querySelector("#score");
+let fond_noir = document.querySelector("#darkscreen");
+let resultat = document.querySelector("#resultat");
+let resultat_txt = document.querySelector("#resultat_txt");
+let record_txt = document.querySelector("#record");
 
 let liste_record = [0, 0, 0, 0];
+let liste_scores = [
+	[0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0],
+	[0, 0, 0, 0, 0]
+];
 let temps, chrono, temps_diff;
 let count = 0;
 let i_temps = 1;
@@ -59,17 +65,36 @@ function afficher_temps() {
 	}
 }
 
-function stop_game() {
-		window.clearTimeout(chrono);
-		fond_noir.style.display = "block";
-		resultat.style.display = "flex";
-		resultat_txt.innerHTML = "Score: " + (count/temps_diff).toFixed(2) + " clic/seconde"
-		if (Number((count/temps_diff).toFixed(2)) > liste_record[i_temps]) {
-			record_txt.innerHTML  = "Nouveau record !"
-			liste_record[i_temps] = Number((count/temps_diff).toFixed(2))
-		} else {
-			record_txt.innerHTML = "Ancien record: " + liste_record[i_temps] + " clic/seconde"
+
+function nouveau_score(score) {
+	let i = 0;
+	let changement = false;
+	do {
+		if (score > liste_scores[i_temps][i]) {
+			for (let j = i; j < 4; j++) {
+				liste_scores[i_temps][4-j+i] = liste_scores[i_temps][3-j+i];
+			}
+			liste_scores[i_temps][i] = score;
+			changement = true;
 		}
+		i++;
+	} while (i < 5 && !changement)
+}
+
+
+function stop_game() {
+	let score = (count/temps_diff).toFixed(2)
+	window.clearTimeout(chrono);
+	fond_noir.style.display = "block";
+	resultat.style.display = "flex";
+	resultat_txt.innerHTML = "Score: " + score + " clic/seconde"
+	nouveau_score(Number(score));
+	if (Number(score) > liste_record[i_temps]) {
+		record_txt.innerHTML  = "Nouveau record !"
+		liste_record[i_temps] = Number(score)
+	} else {
+		record_txt.innerHTML = "Ancien record: " + liste_record[i_temps] + " clic/seconde"
+	}
 }
 
 function stop_game2() {
@@ -82,7 +107,7 @@ function stop_game2() {
 	score.innerHTML = "0.00 CPS";
 }
 
-document.getElementById("cross").addEventListener("click", close_result)
+resultat.querySelector(".cross").addEventListener("click", close_result)
 
 function close_result() {
 	fond_noir.style.display = "none";
@@ -156,9 +181,35 @@ const color_boxes = document.querySelectorAll(".color-themes > div");
 
 for (let i = 0; i < color_boxes.length; i++) {
 	let color_box = color_boxes[i];
+	let color = color_box.classList[0];
+	let color_list = color_themes[color];
+
+	color_box.querySelector(".color1").style.backgroundColor = color_list[0];
+	color_box.querySelector(".color2").style.backgroundColor = color_list[1];
+	color_box.querySelector(".white-strip").style.color = color_list[0];
+
 	color_box.addEventListener("click", () => {
-		let color = color_box.classList[0];
-		document.documentElement.style.setProperty("--color1", color_themes[color][0]);
-		document.documentElement.style.setProperty("--color2", color_themes[color][1]);
+		document.documentElement.style.setProperty("--color1", color_list[0]);
+		document.documentElement.style.setProperty("--color2", color_list[1]);
 	});
 }
+
+
+const leaderboard = document.querySelector(".leaderboard");
+const crown_icon = leaderboard.querySelector(".icon");
+const leaderboard_popup  = leaderboard.querySelector(".popup");
+
+crown_icon.addEventListener("click", () => {
+	stop_game2();
+	leaderboard_popup.style.display = "block";
+	fond_noir.style.display = "block";
+	let liste_cases = leaderboard_popup.querySelectorAll("li.to-fill");
+	for (let i = 0; i < liste_cases.length; i++) {
+		liste_cases[i].innerHTML = liste_scores[Math.floor(i/5)][i%5];
+	}
+});
+
+leaderboard.querySelector(".cross").addEventListener("click", () => {
+	leaderboard_popup.style.display = "none";
+	fond_noir.style.display = "none";
+});
