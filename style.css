@@ -2,6 +2,7 @@
 :root {
 	--color1: #e66868;
 	--color2: #eb8686;
+	--main-gap: 50px;
 }
 
 [data-theme="dark"] {
@@ -36,7 +37,7 @@ body {
 h4 {
 	font-size: 18pt;
 	margin-top: 12pt;
-	margin-bottom: 50px;
+	margin-bottom: var(--main-gap);
 }
 
 
@@ -52,6 +53,7 @@ h4 {
 	right: 50px;
 	width: 100px;
 	height: 50px;
+	padding: 0;
 	background-color: var(--color-bg);
 	border-radius: 25px;
 	border: solid 4px var(--color2);
@@ -61,8 +63,9 @@ h4 {
 .slider {
 	position: absolute;
 	top: 8px;
+	left: 8px;
 	height: 34px;
-	width: 34px;
+	aspect-ratio: 1 / 1;
 	border-radius: 50%;
 	background-color: var(--color2);
 	transition: transform ease-out 0.15s;
@@ -92,7 +95,8 @@ h4 {
 .gear img {
 	position: absolute;
 	right: 0;
-	height: 26px;
+	width: 26px;
+	aspect-ratio: 1 / 1;
 	padding: 12px;
 	border-radius: 25px;
 	background-color: var(--color2);
@@ -107,23 +111,22 @@ h4 {
 .color-themes {
 	display: none;
 	position: fixed;
-	left: 20vw;
-	width: 60vw;
-	height: 60vh;
-	border-radius: 50px;
+	left: 10vw;
+	width: 80vw;
+	border-radius: var(--main-gap);
 	background-color: var(--color-bg);
-	z-index: 2;
+	z-index: 3;
 }
 
 .color-themes .title {
-	font-size: 24pt;
+	font-size: 28pt;
 	color: var(--color-fg);
 	font-weight: bold;
 }
 
 .color-container {
-	margin: 0 50px;
-	width: calc(60vw - 200px);
+	margin: var(--main-gap) 10vw;
+	width: 60vw;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 30px 5%;
@@ -134,7 +137,7 @@ h4 {
 	position: relative;
 	display: block;
 	width: 30%;
-	height: 120px;
+	height: 150px;
 	border-radius: 20px;
 	overflow: hidden;
 	cursor: pointer;
@@ -171,38 +174,33 @@ h4 {
 	height: 0;
 }
 
-
-
-.leaderboard .icon {
+.leaderboard .icon img {
 	position: absolute;
 	top: 36pt;
 	left: 24pt;
-	width: 50px;
-	height: 50px;
-	border-radius: 25px;
-	background-color: var(--color2);
-	cursor: pointer;
-}
-
-.leaderboard .icon img {
 	width: 30px;
-	margin-top: 10px;
+	padding: 10px;
+	aspect-ratio: 1 / 1;
+	border-radius: 25px;
+	cursor: pointer;
+	background-color: var(--color2);
+	transition: background-color 0.1s;
 }
 
-.leaderboard .icon:hover {
+.leaderboard .icon img:hover {
 	background-color: var(--color1);
 }
 
 .leaderboard .popup {
 	display: none;
 	position: absolute;
-	width: 70vw;
+	width: 80vw;
 	top: 10vh;
-	left: 15vw;
-	border-radius: 50px;
+	left: 10vw;
+	border-radius: var(--main-gap);
 	background-color: var(--color-bg);
 	overflow: hidden;
-	z-index: 2;
+	z-index: 3;
 }
 
 .leaderboard .title {
@@ -215,8 +213,8 @@ h4 {
 .score {
 	display: flex;
 	color: #121212;
-	width: calc(70vw - 200px);
-	margin: 50px;
+	width: 70vw;
+	margin: var(--main-gap) 5vw;
 }
 
 .score .table-col {
@@ -253,13 +251,13 @@ h4 {
 }
 
 .score .table-col:last-child ul, .score .table-col:last-child p {
-	border-bottom-right-radius: 25px;
-	border-top-right-radius: 25px;
+	border-bottom-right-radius: calc(var(--main-gap) / 2);
+	border-top-right-radius: calc(var(--main-gap) / 2);
 }
 
 .score .table-col:first-child ul, .score .table-col:first-child p {
-	border-bottom-left-radius: 25px;
-	border-top-left-radius: 25px;
+	border-bottom-left-radius: calc(var(--main-gap) / 2);
+	border-top-left-radius: calc(var(--main-gap) / 2);
 }
 
 
@@ -283,7 +281,7 @@ h4 {
 	display: inline-block;
 	list-style-type: none;
 	padding: 12pt 0;
-	width: 10vw;
+	width: 25%;
 }
 
 
@@ -292,7 +290,7 @@ h4 {
 	display: block;
 	position: absolute;
 	margin-top: 25pt;
-	width: 10vw;
+	width: 25%;
 	height: 6pt;
 	background-color: var(--color1);
 }
@@ -307,17 +305,21 @@ h4 {
 	display: block;
 	position: relative;
 	width: 40vw;
-	padding: 100px 0;
+	height: 300px;
 	background-color: var(--color1);
 	color: #121212;
-	margin: 50px auto;
-	border-radius: 35px;
+	margin: var(--main-gap) auto;
+	border-radius: var(--main-gap);
+	align-items: center;
 	overflow: hidden;
 }
 
 #game_text {
 	display: block;
-	position: relative;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	font-size: 32pt;
 	margin: 0;
 	z-index: 1;
@@ -338,7 +340,7 @@ h4 {
 #timer, #score {
 	display: block;
 	text-align: center;
-	width: calc(20vw - 25px);
+	width: calc(50% - (var(--main-gap)/2));
 	background-color: var(--color2);
 	color: #121212;
 	border-radius: 20px;
@@ -360,6 +362,7 @@ h4 {
 	right: 0;
 	background-color: black;
 	opacity: 0.5;
+	z-index: 2;
 }
 
 #resultat {
@@ -370,8 +373,8 @@ h4 {
 	background-color: var(--color-bg);
 	top: 10vh;
 	left: 25vw;
-	border-radius: 50px;
-	z-index: 2;
+	border-radius: var(--main-gap);
+	z-index: 3;
 
 	text-align: center;
 	justify-content: center;
@@ -381,18 +384,20 @@ h4 {
 
 .cross {
 	position: absolute;
-	top: 50px;
-	right: 50px;
+	top: 25px;
+	right: 25px;
 	display: inline;
 	width: 50px;
-	height: 50px;
+	max-width: 8%;
+	min-width: 30px;
+	aspect-ratio: 1 / 1;
 }
 
 .cross .barre {
 	display: block;
 	position: absolute;
 	width: 100%;
-	height: 10px;
+	height: 20%;
 	top: 20px;
 	background-color: var(--color2);
 	border-radius: 5px;
@@ -424,7 +429,7 @@ h4 {
 footer {
 	background-color: #121212;
 	border-top: solid 4px var(--color1);
-	margin-top: 150px;
+	margin-top: 130px;
 	width: 100%;
 }
 
@@ -467,5 +472,221 @@ footer .copyright {
 	100% {
 		transform: translate(-50%, -50%) scale(1);
 		opacity: 0;
+	}
+}
+
+
+
+@media (max-width: 1024px) and (min-width: 720px){
+	:root {
+		--main-gap: 30px;
+	}
+
+	#title {
+		font-size: 28pt;
+	}
+	h4 {
+		font-size: 16pt;
+	}
+	#game_box {
+		height: 200px;
+	}
+	#game_text {
+		font-size: 24pt;
+	}
+	#timer, #score, .time_bar {
+		font-size: 14pt;
+	}
+
+	#resultat_txt {
+		font-size: 24pt;
+	}
+	#record {
+		font-size: 16pt;
+	}
+
+
+	.leaderboard .title, .color-themes .title {
+		font-size: 22pt;
+	}
+
+	.score .time {
+		font-size: 18pt;
+	}
+	.score li {
+		font-size: 16pt;
+	}
+
+	.color-container > div {
+		height: 100px;
+	}
+	.color-container .white-strip {
+		height: 30px;
+	}
+	.color-container .white-strip p {
+		font-size: 12pt;
+	}
+
+	footer .copyright {
+		font-size: 12pt;
+	}
+}
+
+@media (max-width: 720px) {
+	:root {
+		--main-gap: 20px;
+	}
+
+	#title {
+		margin-top: 100px;
+		font-size: 24pt;
+	}
+	h4 {
+		font-size: 14pt;
+		margin-top: 10pt;
+	}
+
+	#game_box, .time_bar, .info {
+		width: 60vw;
+	}
+
+	#game_box {
+		height: 150px;
+	}
+	#game_text {
+		font-size: 20pt;
+	}
+	#timer, #score, .time_bar{
+		font-size: 12pt;
+	}
+
+	#resultat {
+		width: 70vw;
+		left: 15vw;
+	}
+	#resultat_txt {
+		font-size: 24pt;
+	}
+	#record {
+		font-size: 16pt;
+	}
+
+
+	.leaderboard .title, .color-themes .title {
+		font-size: 16pt;
+	}
+
+	.score .time {
+		font-size: 14pt;
+	}
+	.score li {
+		font-size: 12pt;
+	}
+
+
+	.color-themes .title {
+		margin: 35px 0;
+	}
+	.color-container > div {
+		width: 45%;
+		height: 80px;
+	}
+	.color-container .white-strip {
+		height: 30px;
+	}
+	.color-container .white-strip p {
+		font-size: 12pt;
+	}
+
+
+	footer .copyright {
+		font-size: 12pt;
+	}
+
+	.leaderboard .icon img, .settings {
+		top: 30px;
+	}
+
+	.leaderboard .icon img, .gear img{
+		width: 24px;
+		padding: 8px;
+	}
+
+	.switch, .settings .gear {
+		position: relative;
+		display: inline;
+		margin: 0 5px;
+	}
+
+	.switch {
+		height: 40px;
+		width: 80px;
+		border: solid 4px var(--color2)
+	}
+	.switch.active .slider {
+		transform: translateX(38px);
+	}
+
+	.slider {
+		height: 28px;
+		top: 3px;
+		left: 3px;
+	}
+
+	.slider img {
+		margin-top: 4px;
+	}
+
+	.cross {
+		top: 10px;
+		right: 10px;
+	}
+}
+
+
+@media (max-width: 425px) {	
+	#title {
+		font-size: 20pt;
+	}
+	h4 {
+		font-size: 12pt;
+	}
+
+	#game_text {
+		font-size: 18pt;
+	}
+	#timer, #score{
+		font-size: 10pt;
+	}
+
+	#resultat_txt {
+		font-size: 20pt;
+		margin: 10px 0;
+	}
+
+	.score li {
+		padding: 8pt 0;
+	}
+
+	.color-themes .title {
+		margin: 50px 0 20px 0;
+	}
+	.color-container > div {
+		width: 45%;
+		height: 80px;
+	}
+	.color-container .white-strip {
+		height: 24px;
+	}
+	.color-container .white-strip p {
+		margin-top: 4px;
+		font-size: 10pt;
+	}
+
+	footer {
+		margin-top: 100px;
+	}
+	footer .copyright {
+		font-size: 10pt;
 	}
 }
