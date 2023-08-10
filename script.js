@@ -83,7 +83,7 @@ function nouveau_score(score) {
 
 
 function stop_game() {
-	let score = (count/temps_diff).toFixed(2)
+	let score = (count/temps_max).toFixed(2)
 	window.clearTimeout(chrono);
 	fond_noir.style.display = "block";
 	resultat.style.display = "flex";
@@ -152,24 +152,23 @@ theme_btn.addEventListener("click", () => {
 	}
 });
 
-const gear_icon = document.querySelector(".gear img");
-const gear = document.querySelector(".settings .gear");
-let gear_txt = "closed"
+const color_icon = document.querySelector(".settings .gear");
+const color_themes = document.querySelector(".color-themes");
+let color_txt = "closed"
 
-gear_icon.addEventListener("click", () => {
-	if (gear_txt === "closed") {
-		gear.classList.add("open")
-		gear_icon.classList.add("open");
-		gear_txt = "open";
-	} else {
-		gear.classList.remove("open");
-		gear_icon.classList.remove("open");
-		gear_txt = "closed";
-	}
+color_icon.addEventListener("click", () => {
+	stop_game2();
+	color_themes.style.display = "block";
+	fond_noir.style.display = "block";
 });
 
+color_themes.querySelector(".cross").addEventListener("click", () => {
+	color_themes.style.display = "none";
+	fond_noir.style.display = "none";
+})
 
-const color_themes = {
+
+const color_palette = {
 	"red": 		["#e66868", "#eb8686"],
 	"orange": 	["#e26042", "#e77f67"],
 	"yellow": 	["#f5cd7a", "#f7d794"],
@@ -177,12 +176,12 @@ const color_themes = {
 	"cyan": 	["#3ec1d3", "#64cddb"],
 	"blue": 	["#556ee6", "#778beb"]
 };
-const color_boxes = document.querySelectorAll(".color-themes > div");
+const color_boxes = document.querySelectorAll(".color-container > div");
 
 for (let i = 0; i < color_boxes.length; i++) {
 	let color_box = color_boxes[i];
 	let color = color_box.classList[0];
-	let color_list = color_themes[color];
+	let color_list = color_palette[color];
 
 	color_box.querySelector(".color1").style.backgroundColor = color_list[0];
 	color_box.querySelector(".color2").style.backgroundColor = color_list[1];
@@ -213,3 +212,4 @@ leaderboard.querySelector(".cross").addEventListener("click", () => {
 	leaderboard_popup.style.display = "none";
 	fond_noir.style.display = "none";
 });
+
