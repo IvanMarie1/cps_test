@@ -1,40 +1,38 @@
-let box = document.querySelector("#game_box");
-let text = document.querySelector("#game_text");
-let timer = document.querySelector("#timer");
-let score = document.querySelector("#score");
-let fond_noir = document.querySelector("#darkscreen");
-let resultat = document.querySelector("#resultat");
-let resultat_txt = document.querySelector("#resultat_txt");
-let record_txt = document.querySelector("#record");
+let game_box = document.querySelector("#game-box");
+let game_text = document.querySelector(".game-text");
+let game_result = document.querySelector(".game-result");
+let timer = document.querySelector(".timer");
+let score = document.querySelector(".score");
+let dark_screen = document.querySelector("#darkscreen");
 
-let liste_record = [0, 0, 0, 0];
-let liste_scores = [
+let record_list = [0, 0, 0, 0];
+let score_list = [
 	[0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0],
 	[0, 0, 0, 0, 0]
 ];
-let temps, chrono, temps_diff;
+let time, chrono, time_diff;
 let count = 0;
-let i_temps = 1;
-let temps_max = 5;
-let dico_temps = {1: 0, 5: 1, 10: 2, 30: 3};
+let time_max = 5;
+let time_index = 1;
+let time_dict = {1: 0, 5: 1, 10: 2, 30: 3};
 
-box.addEventListener("click", start);
-box.addEventListener("click", click)
+game_box.addEventListener("click", start);
+game_box.addEventListener("click", click)
 
 function start(e) {
-	box.removeEventListener("click", start)
-	temps = Date.now();
+	game_box.removeEventListener("click", start)
+	time = Date.now();
 	chrono = window.setInterval(afficher_temps, 10)
 }
 
 function click(e) {
-	let left = e.clientX - box.getBoundingClientRect().left;
-	let top = e.clientY - box.getBoundingClientRect().top;
+	let left = e.clientX - game_box.getBoundingClientRect().left;
+	let top = e.clientY - game_box.getBoundingClientRect().top;
 
 	count += 1;
-	text.innerHTML = count;
+	game_text.innerHTML = count;
 	let effect = document.createElement("span");
 	effect.style.cssText = `
 	position: absolute;
@@ -52,15 +50,15 @@ function click(e) {
 	effect.addEventListener("animationend", (e) => {
 		e.target.remove();
 	})
-	box.appendChild(effect)
+	game_box.appendChild(effect)
 
 }
 
 function afficher_temps() {
-	temps_diff = ((Date.now() - temps)/1000).toFixed(2)
-	timer.innerHTML = temps_diff + "s";
-	score.innerHTML = (count/temps_diff).toFixed(2) + " CPS"
-	if (temps_diff >= temps_max) {
+	time_diff = ((Date.now() - time)/1000).toFixed(2)
+	timer.innerHTML = time_diff + "s";
+	score.innerHTML = (count/time_diff).toFixed(2) + " CPS"
+	if (time_diff >= time_max) {
 		stop_game();
 	}
 }
@@ -70,11 +68,11 @@ function nouveau_score(score) {
 	let i = 0;
 	let changement = false;
 	do {
-		if (score > liste_scores[i_temps][i]) {
+		if (score > score_list[time_index][i]) {
 			for (let j = i; j < 4; j++) {
-				liste_scores[i_temps][4-j+i] = liste_scores[i_temps][3-j+i];
+				score_list[time_index][4-j+i] = score_list[time_index][3-j+i];
 			}
-			liste_scores[i_temps][i] = score;
+			score_list[time_index][i] = score;
 			changement = true;
 		}
 		i++;
@@ -83,38 +81,38 @@ function nouveau_score(score) {
 
 
 function stop_game() {
-	let score = (count/temps_max).toFixed(2)
+	let score = (count/time_max).toFixed(2)
 	window.clearTimeout(chrono);
-	fond_noir.style.display = "block";
-	resultat.style.display = "flex";
-	resultat_txt.innerHTML = "Score: " + score + " clic/seconde"
+	dark_screen.style.display = "block";
+	game_result.style.display = "flex";
+	document.querySelector(".result-txt").innerHTML = "Score: " + score + " clic/seconde"
 	nouveau_score(Number(score));
-	if (Number(score) > liste_record[i_temps]) {
-		record_txt.innerHTML  = "Nouveau record !"
-		liste_record[i_temps] = Number(score)
+	if (Number(score) > record_list[time_index]) {
+		document.querySelector(".record-txt").innerHTML  = "Nouveau record !"
+		record_list[time_index] = Number(score)
 	} else {
-		record_txt.innerHTML = "Ancien record: " + liste_record[i_temps] + " clic/seconde"
+		document.querySelector(".record-txt").innerHTML = "Ancien record: " + record_list[time_index] + " clic/seconde"
 	}
 }
 
 function stop_game2() {
 	// Arrête le jeu sans afficher le résultat
 	window.clearTimeout(chrono);
-	box.addEventListener("click", start)
+	game_box.addEventListener("click", start)
 	count = 0;
-	text.innerHTML = "Clique ici pour commencer";
+	game_text.innerHTML = "Clique ici pour commencer";
 	timer.innerHTML = "0.00s";
 	score.innerHTML = "0.00 CPS";
 }
 
-resultat.querySelector(".cross").addEventListener("click", close_result)
+game_result.querySelector(".cross").addEventListener("click", close_result)
 
 function close_result() {
-	fond_noir.style.display = "none";
-	resultat.style.display = "none";
-	box.addEventListener("click", start)
+	dark_screen.style.display = "none";
+	game_result.style.display = "none";
+	game_box.addEventListener("click", start)
 	count = 0;
-	text.innerHTML = "Clique ici pour commencer";
+	game_text.innerHTML = "Clique ici pour commencer";
 	timer.innerHTML = "0.00s";
 	score.innerHTML = "0.00 CPS";
 }
@@ -124,8 +122,8 @@ function change_time(t, name) {
 	stop_game2();
 	document.querySelector("li.active").classList.remove("active");
 	document.querySelector(`li.${name}`).classList.add("active");
-	temps_max = t;
-	i_temps = dico_temps[t];
+	time_max = t;
+	time_index = time_dict[t];
 }
 
 
@@ -152,19 +150,18 @@ theme_btn.addEventListener("click", () => {
 	}
 });
 
-const color_icon = document.querySelector(".settings .gear");
-const color_themes = document.querySelector(".color-themes");
-let color_txt = "closed"
 
-color_icon.addEventListener("click", () => {
+const color_themes = document.querySelector(".color-themes");
+
+document.querySelector(".color-icon").addEventListener("click", () => {
 	stop_game2();
 	color_themes.style.display = "block";
-	fond_noir.style.display = "block";
+	dark_screen.style.display = "block";
 });
 
 color_themes.querySelector(".cross").addEventListener("click", () => {
 	color_themes.style.display = "none";
-	fond_noir.style.display = "none";
+	dark_screen.style.display = "none";
 })
 
 
@@ -176,7 +173,7 @@ const color_palette = {
 	"cyan": 	["#3ec1d3", "#64cddb"],
 	"blue": 	["#556ee6", "#778beb"]
 };
-const color_boxes = document.querySelectorAll(".color-container > div");
+const color_boxes = document.querySelectorAll(".color-box");
 
 for (let i = 0; i < color_boxes.length; i++) {
 	let color_box = color_boxes[i];
@@ -195,21 +192,20 @@ for (let i = 0; i < color_boxes.length; i++) {
 
 
 const leaderboard = document.querySelector(".leaderboard");
-const crown_icon = leaderboard.querySelector(".icon");
-const leaderboard_popup  = leaderboard.querySelector(".popup");
+const crown_icon = leaderboard.querySelector(".lead-icon");
+const lead_container  = leaderboard.querySelector(".lead-container");
 
 crown_icon.addEventListener("click", () => {
 	stop_game2();
-	leaderboard_popup.style.display = "block";
-	fond_noir.style.display = "block";
-	let liste_cases = leaderboard_popup.querySelectorAll("li.to-fill");
+	lead_container.style.display = "block";
+	dark_screen.style.display = "block";
+	let liste_cases = lead_container.querySelectorAll("li.to-fill");
 	for (let i = 0; i < liste_cases.length; i++) {
-		liste_cases[i].innerHTML = liste_scores[Math.floor(i/5)][i%5];
+		liste_cases[i].innerHTML = score_list[Math.floor(i/5)][i%5];
 	}
 });
 
 leaderboard.querySelector(".cross").addEventListener("click", () => {
-	leaderboard_popup.style.display = "none";
-	fond_noir.style.display = "none";
+	lead_container.style.display = "none";
+	dark_screen.style.display = "none";
 });
-
