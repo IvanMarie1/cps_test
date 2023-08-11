@@ -26,7 +26,7 @@ body {
 	margin: 0;
 	background-color: var(--color-bg);
 	color: var(--color-fg);
-	transition: background 0.1s;
+	transition: background 0.2s;
 }
 
 #title {
@@ -34,7 +34,7 @@ body {
 	margin-bottom: 0;
 }
 
-h4 {
+.sub-title {
 	font-size: 18pt;
 	margin-top: 12pt;
 	font-weight: 600;
@@ -50,52 +50,45 @@ h4 {
 
 
 .switch {
-	display: block;	
-	right: 50px;
+	display: block;
 	width: 100px;
 	height: 50px;
 	padding: 0;
 	background-color: var(--color-bg);
 	border-radius: 25px;
 	border: solid 4px var(--color2);
-	transition: all 0.1s;
+	transition: border, background-color 0.2s;
 }
 
-.slider {
-	position: absolute;
-	top: 8px;
-	left: 8px;
-	height: 34px;
-	aspect-ratio: 1 / 1;
-	border-radius: 50%;
-	background-color: var(--color2);
-	transition: transform ease-out 0.15s;
-}
-
-.switch.active .slider {
+.switch.active .slider img {
 	transform: translateX(50px);
 }
 
 .slider img {
-	width: 20px;
-	margin-top: 7px;
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	height: 20px;
+	padding: 7px;
+	aspect-ratio: 1 / 1;
+	border-radius: 50%;
+	background-color: var(--color2);
+	transition: transform ease-out 0.2s;
 }
 
 .switch:hover {
 	border: solid 4px var(--color1);
 }
-.switch:hover .slider {
+.switch:hover .slider img {
 	background-color:var(--color1);
 }
 
-.gear {
+.color-icon {
 	position: absolute;
 	right: 0;
 	margin-top: 25px;
 }
-.gear img {
-	position: absolute;
-	right: 0;
+.color-icon img {
 	width: 26px;
 	aspect-ratio: 1 / 1;
 	padding: 12px;
@@ -105,7 +98,7 @@ h4 {
 	cursor: pointer;
 }
 
-.gear img:hover {
+.color-icon img:hover {
 	background-color: var(--color1);
 }
 
@@ -122,7 +115,7 @@ h4 {
 .color-themes .title {
 	font-size: 28pt;
 	color: var(--color-fg);
-	font-weight: bold;
+	font-weight: 800;
 }
 
 .color-container {
@@ -134,12 +127,11 @@ h4 {
 
 }
 
-.color-container > div {
+.color-box {
 	position: relative;
-	display: block;
 	width: 30%;
 	height: 150px;
-	border-radius: 20px;
+	border-radius: calc(var(--main-gap) / 2);
 	overflow: hidden;
 	cursor: pointer;
 }
@@ -168,14 +160,14 @@ h4 {
 	text-transform: uppercase;
 	margin: 0;
 	margin-top: 5pt;
-	font-weight: bold;
+	font-weight: 800;
 }
 
-.color-container > div:hover .white-strip {
+.color-box:hover .white-strip {
 	height: 0;
 }
 
-.leaderboard .icon img {
+.lead-icon img {
 	position: absolute;
 	top: 36pt;
 	left: 24pt;
@@ -188,11 +180,11 @@ h4 {
 	transition: background-color 0.1s;
 }
 
-.leaderboard .icon img:hover {
+.lead-icon img:hover {
 	background-color: var(--color1);
 }
 
-.leaderboard .popup {
+.lead-container {
 	display: none;
 	position: absolute;
 	width: 80vw;
@@ -211,35 +203,35 @@ h4 {
 	margin-top: 24pt;
 }
 
-.score {
+.lead-table {
 	display: flex;
 	color: #121212;
 	width: 70vw;
 	margin: var(--main-gap) 5vw;
 }
 
-.score .table-col {
+.lead-table .table-col {
 	width: 25%;
 	height: 100%;
 }
 
-.score ul {
+.lead-table ul {
 	background-color: var(--color1);
 	margin: 0;
 	padding: 12pt 0;
 
 }
 
-.score li {
+.lead-table li {
 	display: block;
 	font-size: 18pt;
+	font-weight: 600;
 	padding: 12pt 0;
 	list-style-type: none;
 }
 
 
-.score p {
-	display: block;
+.lead-table p {
 	background-color: var(--color1);
 	font-size: 20pt;
 	font-weight: bold;
@@ -247,16 +239,16 @@ h4 {
 	margin-top: 0;
 }
 
-.score .table-col:nth-child(odd) ul, .score .table-col:nth-child(odd) p {
+.lead-table .table-col:nth-child(odd) ul, .lead-table .table-col:nth-child(odd) p {
 	background-color: var(--color2);
 }
 
-.score .table-col:last-child ul, .score .table-col:last-child p {
+.lead-table .table-col:last-child ul, .lead-table .table-col:last-child p {
 	border-bottom-right-radius: calc(var(--main-gap) / 2);
 	border-top-right-radius: calc(var(--main-gap) / 2);
 }
 
-.score .table-col:first-child ul, .score .table-col:first-child p {
+.lead-table .table-col:first-child ul, .lead-table .table-col:first-child p {
 	border-bottom-left-radius: calc(var(--main-gap) / 2);
 	border-top-left-radius: calc(var(--main-gap) / 2);
 }
@@ -264,46 +256,44 @@ h4 {
 
 
 
-.time_bar {
+.time-bar {
 	position: relative;
 	display: flex;
 	width: 40vw;
 	margin: auto;
 	padding: 0;
 	font-size: 16pt;
-	font-weight: bold;
+	font-weight: 800;
 	background-color: var(--color2);
 	color: #121212;
 	border-radius: 20px;
 	overflow: hidden;
 }
 
-.time_bar li {
-	display: inline-block;
+.time-bar li {
 	list-style-type: none;
 	padding: 12pt 0;
 	width: 25%;
 }
 
 
-.time_bar .time:not(.active):hover::before {
+.time-bar .time:not(.active):hover::before {
 	content: "";
 	display: block;
 	position: absolute;
-	margin-top: 25pt;
+	bottom: 0;
 	width: 25%;
 	height: 6pt;
 	background-color: var(--color1);
 }
 
-.time_bar .active {
+.time-bar .active {
 	background-color: var(--color1);
 }
 
 
 
-#game_box {
-	display: block;
+#game-box {
 	position: relative;
 	width: 40vw;
 	height: 300px;
@@ -311,11 +301,10 @@ h4 {
 	color: #121212;
 	margin: var(--main-gap) auto;
 	border-radius: var(--main-gap);
-	align-items: center;
 	overflow: hidden;
 }
 
-#game_text {
+.game-text {
 	display: block;
 	position: absolute;
 	top: 50%;
@@ -328,7 +317,7 @@ h4 {
 
 
 
-.info {
+.game-info {
 	width: 40vw;
 	margin: auto;
 	display: flex;
@@ -338,13 +327,12 @@ h4 {
 
 
 
-#timer, #score {
-	display: block;
+.timer, .score {
 	text-align: center;
 	width: calc(50% - (var(--main-gap)/2));
 	background-color: var(--color2);
 	color: #121212;
-	border-radius: 20px;
+	border-radius: calc(var(--main-gap) / 2);
 	margin: 0;
 	padding: 25px 0;
 	font-size: 20pt;
@@ -366,7 +354,7 @@ h4 {
 	z-index: 2;
 }
 
-#resultat {
+.game-result {
 	display: none;
 	position: absolute;
 	width: 50vw;
@@ -376,7 +364,6 @@ h4 {
 	left: 25vw;
 	border-radius: var(--main-gap);
 	z-index: 3;
-
 	text-align: center;
 	justify-content: center;
 	flex-direction: column;
@@ -387,14 +374,14 @@ h4 {
 	position: absolute;
 	top: 25px;
 	right: 25px;
-	display: inline;
 	width: 50px;
 	max-width: 8%;
 	min-width: 30px;
 	aspect-ratio: 1 / 1;
+	cursor: pointer;
 }
 
-.cross .barre {
+.cross .rod {
 	display: block;
 	position: absolute;
 	width: 100%;
@@ -402,26 +389,26 @@ h4 {
 	top: 20px;
 	background-color: var(--color2);
 	border-radius: 5px;
-	transition: background-color 0.1s;
+	transition: background-color 0.2s;
 }
-.cross .barre.gauche {
+.cross .rod.left {
 	transform: rotate(45deg);
 }
-.cross .barre.droite {
+.cross .rod.right {
 	transform: rotate(-45deg);
 }
-.cross:hover .barre {
+.cross:hover .rod {
 	background-color: var(--color1);
 }
 
 
-#resultat_txt {
+.result-txt {
 	font-size: 32pt;
 	font-weight: bold;
 	margin: 20px;
 }
 
-#record {
+.record-txt {
 	font-size: 18pt;
 	font-weight: 600;
 	margin: 10px;
@@ -452,6 +439,7 @@ footer {
 footer .copyright {
 	color: #AAAAAA;
 	font-size: 14pt;
+	font-weight: 200;
 	margin: 0;
 	padding-bottom: 25px;
 }
@@ -487,23 +475,23 @@ footer .copyright {
 	#title {
 		font-size: 28pt;
 	}
-	h4 {
+	.sub-title {
 		font-size: 16pt;
 	}
-	#game_box {
+	#game-box {
 		height: 200px;
 	}
-	#game_text {
+	.game-text {
 		font-size: 24pt;
 	}
-	#timer, #score, .time_bar {
+	.timer, .score, .time-bar {
 		font-size: 14pt;
 	}
 
-	#resultat_txt {
+	.result_txt {
 		font-size: 24pt;
 	}
-	#record {
+	.record-txt {
 		font-size: 16pt;
 	}
 
@@ -512,14 +500,14 @@ footer .copyright {
 		font-size: 22pt;
 	}
 
-	.score .time {
+	.lead-table .time {
 		font-size: 18pt;
 	}
-	.score li {
+	.lead-table li {
 		font-size: 16pt;
 	}
 
-	.color-container > div {
+	.color-box {
 		height: 100px;
 	}
 	.color-container .white-strip {
@@ -543,33 +531,33 @@ footer .copyright {
 		margin-top: 100px;
 		font-size: 24pt;
 	}
-	h4 {
+	.sub-title {
 		font-size: 14pt;
 		margin-top: 10pt;
 	}
 
-	#game_box, .time_bar, .info {
+	#game-box, .time-bar, .game-info {
 		width: 60vw;
 	}
 
-	#game_box {
+	#game-box {
 		height: 150px;
 	}
-	#game_text {
+	.game-text {
 		font-size: 20pt;
 	}
-	#timer, #score, .time_bar{
+	.timer, .score, .time-bar {
 		font-size: 12pt;
 	}
 
-	#resultat {
+	.game-result {
 		width: 70vw;
 		left: 15vw;
 	}
-	#resultat_txt {
+	.result_txt {
 		font-size: 24pt;
 	}
-	#record {
+	.record-txt {
 		font-size: 16pt;
 	}
 
@@ -578,10 +566,10 @@ footer .copyright {
 		font-size: 16pt;
 	}
 
-	.score .time {
+	.lead-table .time {
 		font-size: 14pt;
 	}
-	.score li {
+	.lead-table li {
 		font-size: 12pt;
 	}
 
@@ -589,7 +577,7 @@ footer .copyright {
 	.color-themes .title {
 		margin: 35px 0;
 	}
-	.color-container > div {
+	.color-box {
 		width: 45%;
 		height: 80px;
 	}
@@ -605,16 +593,16 @@ footer .copyright {
 		font-size: 12pt;
 	}
 
-	.leaderboard .icon img, .settings {
+	.lead-icon img, .settings {
 		top: 30px;
 	}
 
-	.leaderboard .icon img, .gear img{
+	.lead-icon img, .color-icon img{
 		width: 24px;
 		padding: 8px;
 	}
 
-	.switch, .settings .gear {
+	.switch, .settings .color-icon {
 		position: relative;
 		display: inline;
 		margin: 0 5px;
@@ -650,30 +638,30 @@ footer .copyright {
 	#title {
 		font-size: 20pt;
 	}
-	h4 {
+	.sub-title {
 		font-size: 12pt;
 	}
 
-	#game_text {
+	.game-text {
 		font-size: 18pt;
 	}
-	#timer, #score{
+	.timer, .score{
 		font-size: 10pt;
 	}
 
-	#resultat_txt {
+	.result_txt {
 		font-size: 20pt;
 		margin: 10px 0;
 	}
 
-	.score li {
+	.lead-table li {
 		padding: 8pt 0;
 	}
 
 	.color-themes .title {
 		margin: 50px 0 20px 0;
 	}
-	.color-container > div {
+	.color-box {
 		width: 45%;
 		height: 80px;
 	}
