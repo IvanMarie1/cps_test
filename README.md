@@ -12,6 +12,6 @@ Website to test your CPS in HTML CSS and JS
 
 ## Notes
 - The leaderboard is not saved if you refresh the page
-- Only available in french
+- Only available in french (maybe add a translation one day)
 
 Enjoy :)
