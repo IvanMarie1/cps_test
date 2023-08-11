@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		<h1 id="title">Test de vitesse de clic</h1>
-		<h4>Cliquez aussi vite que vous pouvez !</h4>
+		<h4 class="sub-title">Cliquez aussi vite que vous pouvez !</h4>
 
 		<div class="settings">
 			<button 
@@ -23,7 +23,7 @@
 					<img src="img/icon_sun.png">
 				</div>
 			</button>
-			<div class="gear">
+			<div class="color-icon">
 				<img src="img/icon_color.png">
 			</div>
 			<div class="color-themes">
@@ -33,53 +33,52 @@
 				</div>
 				<p class="title">Thèmes de couleur</p>
 				<div class="color-container">
-					<div class="red">
+					<div class="red color-box">
 						<div class="color1"></div>
 						<div class="color2"></div>
 						<div class="white-strip"><p>red</p></div>
 					</div>
-					<div class="orange">
+					<div class="orange color-box">
 						<div class="color1"></div>
 						<div class="color2"></div>
 						<div class="white-strip"><p>orange</p></div>
 					</div>
-					<div class="yellow">
+					<div class="yellow color-box">
 						<div class="color1"></div>
 						<div class="color2"></div>
 						<div class="white-strip"><p>Yellow</p></div>
 					</div>
-					<div class="blue">
+					<div class="blue color-box">
 						<div class="color1"></div>
 						<div class="color2"></div>
 						<div class="white-strip"><p>blue</p></div>
 					</div>
-					<div class="cyan">
+					<div class="cyan color-box">
 						<div class="color1"></div>
 						<div class="color2"></div>
 						<div class="white-strip"><p>cyan</p></div>
 					</div>
-					<div class="pink">
+					<div class="pink color-box">
 						<div class="color1"></div>
 						<div class="color2"></div>
 						<div class="white-strip"><p>pink</p></div>
 					</div>
 				</div>
-				
 			</div>
 		</div>
 
 		<div class="leaderboard">
-			<div class="icon">
+			<div class="lead-icon">
 				<img src="img/icon_crown.png">
 			</div>
 
-			<div class="popup">
+			<div class="lead-container">
 				<div class="cross">
 					<div class="barre gauche"></div>
 					<div class="barre droite"></div>
 				</div>
 				<p class="title">Tes records</p>
-				<div class="score">
+				<div class="lead-table">
 					<div class="table-col">
 						<p class="time">1</p>
 						<ul>
@@ -128,37 +127,29 @@
 		</div>
 		
 
-		<ul class="time_bar">
-			<li class="time one" onclick="change_time(1, 'one')">1
-				<div class="highlight"></div>
-			</li>
-			<li class="time five active" onclick="change_time(5, 'five')">5
-				<div class="highlight"></div>
-			</li>
-			<li class="time ten" onclick="change_time(10, 'ten')">10
-				<div class="highlight"></div>
-			</li>
-			<li class="time thirty" onclick="change_time(30, 'thirty')">30
-				<div class="highlight"></div>
-			</li>
+		<ul class="time-bar">
+			<li class="time one" onclick="change_time(1, 'one')">1</li>
+			<li class="time five active" onclick="change_time(5, 'five')">5</li>
+			<li class="time ten" onclick="change_time(10, 'ten')">10</li>
+			<li class="time thirty" onclick="change_time(30, 'thirty')">30</li>
 		</ul>
 
-		<div id="game_box">
-			<p id="game_text">Clique ici pour commencer</p>
+		<div id="game-box">
+			<p class="game-text">Clique ici pour commencer</p>
 		</div>
-		<div class="info">
-			<p id="timer">0.00s</p>
-			<p id="score">0.00 CPS</p>
+		<div class="game-info">
+			<p class="timer">0.00s</p>
+			<p class="score">0.00 CPS</p>
 		</div>
 
 		<div id="darkscreen"></div>
-		<div id="resultat">
+		<div class="game-result">
 			<div class="cross">
-				<div class="barre gauche"></div>
-				<div class="barre droite"></div>
+				<div class="rod left"></div>
+				<div class="rod right"></div>
 			</div>
-			<p id="resultat_txt"></p>
-			<p id="record"></p>
+			<p class="result-txt"></p>
+			<p class="record-txt"></p>
 		</div>
 
 		<footer>
