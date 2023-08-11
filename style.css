@@ -2,7 +2,7 @@
 :root {
 	--color1: #e66868;
 	--color2: #eb8686;
-	--main-gap: 50px;
+	--main-gap: 40px;
 }
 
 [data-theme="dark"] {
@@ -595,6 +595,7 @@ footer .copyright {
 
 	.lead-icon img, .settings {
 		top: 30px;
+		display: flex;
 	}
 
 	.lead-icon img, .color-icon img{
@@ -602,9 +603,9 @@ footer .copyright {
 		padding: 8px;
 	}
 
-	.switch, .settings .color-icon {
+	.switch, .color-icon {
 		position: relative;
-		display: inline;
+		display: inline-block;
 		margin: 0 5px;
 	}
 
@@ -613,18 +614,15 @@ footer .copyright {
 		width: 80px;
 		border: solid 4px var(--color2)
 	}
-	.switch.active .slider {
-		transform: translateX(38px);
-	}
-
-	.slider {
-		height: 28px;
-		top: 3px;
-		left: 3px;
+	.switch.active .slider img {
+		transform: translateX(40px);
 	}
 
 	.slider img {
-		margin-top: 4px;
+		top: 3px;
+		left: 3px;
+		height: 16px;
+		padding: 5px;
 	}
 
 	.cross {
